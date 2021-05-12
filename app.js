@@ -23,15 +23,29 @@ app.get('/', (req, res) => {
 });
 
 app.get('/beers', (req, res) => {
-  res.render("beers.hbs")
-  .getBeers()
-  .then(beersFromApi => console.log('Beers from the database: ', beersFromApi))
-  .catch(error => console.log(error));
+  const beers = [{ name: 'kro' }, { name: '8.6' }];
+  punkAPI
+    .getBeers()
+    .then(beersFromApi => {
+      res.render('beers', { beers: beers });
+    })
+    .catch(error => console.log(error));
 });
 
-app.get('/randomBeer', (req, res) => {
-  res.render('randomBeer.hbs');
+
+app.get('/random-beer', (req, res) => {
+  const random = [{ name: 'kro' }];
+  punkAPI
+    .getRandom()
+    .then(responseFromAPI => {
+      // your magic happens here`
+      // console.log(responseFromAPI);
+      res.render('beers', { beer: responseFromAPI[0] });
+    })
+    .catch(error => console.log(error));
 });
+
+
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

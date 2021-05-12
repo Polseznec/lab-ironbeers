@@ -1,8 +1,10 @@
 <h1>Beers</h1>
 <div>
-    {{#each getBeers}}
-    <div>
-        <h1>{{this.beer}}</h1>
+    {{#each beers}}
+    <div class="card">
+        {{this.name}}
+        <a href="/beers/{{this._id}}">see more</a>
     </div>
     {{/each}}
+    {{description}}
 </div>
